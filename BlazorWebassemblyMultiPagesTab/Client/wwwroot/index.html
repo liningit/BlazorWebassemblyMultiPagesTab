@@ -20,6 +20,48 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        window.AddTab = (title, url) => {
+            if (parent && parent != this) {
+                parent.DotNet.invokeMethod('BlazorApp9.Client', "AddTab", title, url);
+            } else {
+                window.open(url);
+            }
+
+        };
+
+        window.GoTo = (title, url) => {
+            if (parent && parent != this) {
+                parent.DotNet.invokeMethod('BlazorApp9.Client', "GoTo", title, url);
+            } else {
+                location.href = url;
+            }
+
+        };
+        window.CloseTab = (title, url) => {
+            if (parent && parent != this) {
+                parent.DotNet.invokeMethod('BlazorApp9.Client', "CloseTab");
+            } else {
+                window.close();
+            }
+
+        };
+
+        window.GetTabWidth = (index) => {
+            var lst = document.querySelectorAll('.middletab-tabs li');
+            if (lst.length > index) {
+                return lst[index].offsetWidth;
+            }
+            return 0;
+        }
+        window.GetWidth = (query) => {
+            var obj = document.querySelector(query);
+            if (obj) {
+                return obj.offsetWidth;
+            }
+            return 0;
+        }
+    </script>
 </body>
 
 </html>

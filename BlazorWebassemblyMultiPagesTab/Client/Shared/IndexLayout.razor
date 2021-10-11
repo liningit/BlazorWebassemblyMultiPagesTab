@@ -1,0 +1,31 @@
+﻿@using BlazorWebassemblyMultiPagesTab.Client.Code
+@using BlazorWebassemblyMultiPagesTab.Shared
+@inherits LayoutComponentBase
+@implements INavMenu
+<div class="page">
+    <div class="sidebar">
+        <div style="width:250px; height: 100vh;overflow-y:scroll;overflow-x:visible">
+            <CascadingValue Value="this">
+                <NavMenu />
+            </CascadingValue>
+        </div>
+    </div>
+
+    <main>
+        <div class="top-row px-4">         
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <div style="height: calc(100% - 60px);">
+            <TabSet @ref="tabSet" />
+        </div>
+    </main>
+</div>
+@code
+{
+    public TabSet tabSet;
+    public async Task GoTo(string title, string url)
+    {
+        await tabSet.RunAddTab(title, url);
+    }
+}
